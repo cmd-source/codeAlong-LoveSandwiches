@@ -20,16 +20,19 @@ def get_sales_data():
     print("The data should be six numbers seperasted by commas")
     print("Example: 10,20,30,40,50,60\n")
 
-    data_str = input("Enter your data here: ")   
+    data_str = input("Enter your data here: ")
+
     sales_data = data_str.split(",")
-    validate_data(sales_data)      
+    validate_data(sales_data)
+    
 
 def validate_data(values):
     """
-    Function should convert all strings to integers 
+    Function should convert all strings to integers
     Raises a ValueError if strings cannot be converted into integers or if there is not six integers
     """
     try:
+        [int(value) for value in values]
         if len(values) != 6:
             raise ValueError(f"Expected 6 values, you provided {len(values)}")
     except ValueError as e:
