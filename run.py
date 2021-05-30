@@ -47,14 +47,14 @@ def validate_data(values):
         return False
     return True
 
-def update_sales_worksheet(data):
+def updating_worksheet(data,worksheet):
     """
-    Function updates a new line of data into the Googlesheets
+    Function takes new data and supplies it into the google sheet
     """
-    print("Updating sales worksheet...")
-    sales_worksheet = SHEET.worksheet("sales")
-    sales_worksheet.append_row(data)
-    print("Sales worksheet updated successfully.\n")
+    print(f"updating the {worksheet}...\n")
+    new_data = SHEET.worksheet(worksheet)
+    new_data.append_row(data)
+    print(f"The new data {data} has been successfully added to the {worksheet}.")
 
 def calculate_surplus_data(sales_row):
     """
@@ -70,15 +70,6 @@ def calculate_surplus_data(sales_row):
         surplus_data.append(surplus)
     return surplus_data
 
-def insert_surplus_data(insert_surplus):
-    """
-    Function takes the new surplus data and appends it into the google worksheet
-    """
-    print("Updating the Surplus worksheet...\n")
-    surplus_worksheet = SHEET.worksheet("surplus")
-    surplus_worksheet.append_row(insert_surplus)
-    print("The new surplus data has been added in.\n")
-
 
 def main(): 
     """
@@ -87,9 +78,9 @@ def main():
   
     data = get_sales_data()
     sales_data = [int(num) for num in data]
-    update_sales_worksheet(sales_data)
+    updating_worksheet(sales_data,"sales")
     new_surplus_data = calculate_surplus_data(sales_data)
-    insert_surplus_data(new_surplus_data)
+    updating_worksheet(new_surplus_data,"surplus")
 
 print("welcome to LoveSandwiches")
 main()
