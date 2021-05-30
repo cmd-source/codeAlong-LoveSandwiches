@@ -33,7 +33,6 @@ def get_sales_data():
 
     return sales_data
 
-
 def validate_data(values):
     """
     Function should convert all strings to integers
@@ -47,7 +46,6 @@ def validate_data(values):
         print(f"Invalid data: {e}, please try again.\n")
         return False
     return True
-
 
 def update_sales_worksheet(data):
     """
@@ -72,6 +70,15 @@ def calculate_surplus_data(sales_row):
         surplus_data.append(surplus)
     return surplus_data
 
+def insert_surplus_data(insert_surplus):
+    """
+    Function takes the new surplus data and appends it into the google worksheet
+    """
+    print("Updating the Surplus worksheet...\n")
+    surplus_worksheet = SHEET.worksheet("surplus")
+    surplus_worksheet.append_row(insert_surplus)
+    print("The new surplus data has been added in.\n")
+
 
 def main(): 
     """
@@ -82,7 +89,7 @@ def main():
     sales_data = [int(num) for num in data]
     update_sales_worksheet(sales_data)
     new_surplus_data = calculate_surplus_data(sales_data)
-    print(new_surplus_data)
+    insert_surplus_data(new_surplus_data)
 
 print("welcome to LoveSandwiches")
 main()
