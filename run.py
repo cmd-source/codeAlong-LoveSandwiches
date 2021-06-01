@@ -104,23 +104,16 @@ def calculate_stock_data(data):
 
 
 def get_stock_values(data):
-    """
-    Retrieves the first 5 headings
-    """
-    stock_data = SHEET.worksheet("stock")
+    headings = SHEET.worksheet("stock").row_values(1)
 
-    headings = []
-    for ind in range(1,7):
-        heading = stock_data.col_values(ind)
-        headings.append(heading[0])
-    return headings
+    return {headings[i]: data[i] for i in range(len(headings))}
+    
 
 
 def main(): 
     """
     Run all program functions
     """
-  
     data = get_sales_data()
     sales_data = [int(num) for num in data]
     updating_worksheet(sales_data,"sales")
@@ -131,11 +124,11 @@ def main():
     print("the new stock data is: "f"{stock_data}")
     updating_worksheet(stock_data,"stock")
     print("The stock headings are:\n")
-    stock_values = get_stock_values(stock_data)
+    
 
-    new_stock = {stock_values[i]: stock_data[i] for i in range(len(stock_values))}
-    print("Make the following numbers of sandwiches for next market:\n")
-    print(new_stock)
+    print("Make the following numbers of sandwiches for next market:")
+    stock_values = get_stock_values(stock_data)
+    print(stock_values)
 
 print("welcome to LoveSandwiches")
 main()
