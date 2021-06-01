@@ -113,7 +113,8 @@ def get_stock_values(data):
     for ind in range(1,7):
         heading = stock_data.col_values(ind)
         headings.append(heading[0])
-    print(headings) 
+    return headings
+
 
 def main(): 
     """
@@ -130,7 +131,11 @@ def main():
     print("the new stock data is: "f"{stock_data}")
     updating_worksheet(stock_data,"stock")
     print("The stock headings are:\n")
-    get_stock_values(stock_data)
+    stock_values = get_stock_values(stock_data)
+
+    new_stock = {stock_values[i]: stock_data[i] for i in range(len(stock_values))}
+    print("Make the following numbers of sandwiches for next market:\n")
+    print(new_stock)
 
 print("welcome to LoveSandwiches")
 main()
